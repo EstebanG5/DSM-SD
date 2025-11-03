@@ -1,0 +1,6 @@
+# Dockerfile.nodo1
+FROM python:3.11-slim
+WORKDIR /app
+# Copia el código del servidor
+COPY dsm_server.py /app/
+# El comando final se define en docker-compose.yml

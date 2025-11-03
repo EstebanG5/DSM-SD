@@ -1,0 +1,8 @@
+# Dockerfile.nodo2
+FROM python:3.11-slim
+WORKDIR /app
+# Instalar 'requests' PERMANENTEMENTE en la imagen.
+RUN pip install requests
+# Copia el código del cliente
+COPY dsm_client.py /app/
+# El comando final se define en docker-compose.yml

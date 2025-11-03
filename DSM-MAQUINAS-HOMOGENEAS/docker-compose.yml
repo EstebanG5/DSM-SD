@@ -1,0 +1,32 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  # ----------------------------------------
+  # NODO 1: Servidor DSM (el que aloja la variable)
+  # ----------------------------------------
+  nodo1:
+    build:
+      context: . # Usa el directorio actual
+      dockerfile: Dockerfile.nodo1 # Usaremos un Dockerfile específico
+    container_name: nodo1
+    networks:
+      - dsmnet
+    # Comando para ejecutar el servidor Flask
+    command: sh -c "pip install flask && python dsm_server.py"
+
+ 
+  # NODO 2: Cliente
+  nodo2:
+    build:
+      context: .
+      dockerfile: Dockerfile.nodo2 
+    container_name: nodo2
+    networks:
+      - dsmnet
+    # Comando para instalar 'requests' y ejecutar el cliente
+    command: sh -c "sleep 15 && python dsm_client.py"
+
+networks:
+  dsmnet:
+    driver: bridge
